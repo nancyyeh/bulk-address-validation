@@ -54,7 +54,6 @@ router.post(
         let addressData = undefined;
         if (lookup.result && lookup.result.length) {
           const lookupResult = lookup.result[0];
-          console.log(lookupResult)
           addressData = {
             address_line_one: lookupResult.deliveryLine1,
             city: lookupResult.components.cityName,
