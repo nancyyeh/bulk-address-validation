@@ -4,6 +4,7 @@
   "description": "bulk address validation endpoint",
   "main": "index.js",
   "scripts": {
+    "start": "npm run server",
     "devStart": "nodemon server.js"
   },
   "author": "Nancy Yeh",
