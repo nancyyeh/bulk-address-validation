@@ -15,10 +15,10 @@
     "mongoose": "^6.2.6",
     "mongosh": "^1.2.3",
     "node-cache": "^5.1.2",
-    "smartystreets-javascript-sdk": "^1.11.11"
+    "smartystreets-javascript-sdk": "^1.11.11",
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
-    "dotenv": "^16.0.0",
     "nodemon": "^2.0.15"
   }
 }
