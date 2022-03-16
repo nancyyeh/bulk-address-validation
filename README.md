@@ -3,7 +3,7 @@
 A standalone service that allows you to validate addresses with caching functionality to ensure that we don't want to keep looking up the same address again and
 again.
 
-Live Link [https://bulk-address-validation.herokuapp.com/]
+Live Link[https://bulk-address-validation.herokuapp.com/]
 
 # 🛠️ How to use
 
