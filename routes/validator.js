@@ -8,7 +8,7 @@ const {
   getSmartyAddresses,
   addAddressesToDb,
   getAddress,
-} = require("./Helper/helperFunctions");
+} = require("./helper/helper_functions");
 
 router.post(
   "/",
