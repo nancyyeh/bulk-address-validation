@@ -1,4 +1,6 @@
 const Address = require("../../models/Address");
+const NodeCache = require("node-cache");
+const myCache = new NodeCache();
 
 const SmartySDK = require("smartystreets-javascript-sdk");
 const SmartyCore = SmartySDK.core;
@@ -98,9 +100,38 @@ async function addAddressesToDb(addresses) {
   }
 }
 
+async function getAddress(addressString) {
+    if (myCache.has(addressString)) {
+      // console.log('Retrieved value from cache!')
+      return myCache.get(addressString);
+    }
+  
+    const addressDatainDB = await Address.findOne({
+      input: addressString,
+    }).exec();
+  
+    if (addressDatainDB) {
+      const address = {
+        address_line_one: addressDatainDB.line1,
+        city: addressDatainDB.city,
+        state: addressDatainDB.state,
+        zip_code: addressDatainDB.zip,
+        latitude: addressDatainDB.latitude,
+        longitude: addressDatainDB.longitude,
+        response: "Valid Address",
+      };
+      // console.log('Value not present in cache, adding...')
+      myCache.set(addressString, address);
+      return address;
+    }
+  
+    return null;
+  }
+
 module.exports = {
   stringifyAddress,
   createSmartyBatch,
   getSmartyAddresses,
   addAddressesToDb,
+  getAddress,
 };

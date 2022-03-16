@@ -7,6 +7,7 @@ const {
   createSmartyBatch,
   getSmartyAddresses,
   addAddressesToDb,
+  getAddress,
 } = require("./Helper/helperFunctions");
 
 router.post(
@@ -52,19 +53,19 @@ router.post(
       });
     }
 
-    // Find those request data that's not in the db, and create the batch job of input address that's not in the db
-    const batch = await createSmartyBatch(requestData);
+      // Find those request data that's not in the db, and create the batch job of input address that's not in the db
+      const batch = await createSmartyBatch(requestData);
 
-    // If there is address that is not in the DB, valid it in Smarty
-    let batchAddressData;
-    try {
-      batchAddressData = await getSmartyAddresses(batch);
-    } catch (err) {
-      return res.status(500).json({
-        success: false,
-        message: "Fail to validate addresses with Smarty",
-      });
-    }
+      // If there is address that is not in the DB, valid it in Smarty
+      let batchAddressData;
+      try {
+        batchAddressData = await getSmartyAddresses(batch);
+      } catch (err) {
+        return res.status(500).json({
+          success: false,
+          message: "Fail to validate addresses with Smarty",
+        });
+      }
 
     await addAddressesToDb(batchAddressData);
 
@@ -78,20 +79,10 @@ router.post(
         state,
         zip: zip_code,
       });
-      const addressDatainDB = await Address.findOne({
-        input: addressString,
-      }).exec();
+      const addressData = await getAddress(addressString);
 
-      if (addressDatainDB) {
-        data.push({
-          address_line_one: addressDatainDB.line1,
-          city: addressDatainDB.city,
-          state: addressDatainDB.state,
-          zip_code: addressDatainDB.zip,
-          latitude: addressDatainDB.latitude,
-          longitude: addressDatainDB.longitude,
-          response: "Valid Address",
-        });
+      if (addressData) {
+        data.push(addressData);
       } else {
         data.push({ response: "Invalid Address" });
       }
