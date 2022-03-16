@@ -53,19 +53,19 @@ router.post(
       });
     }
 
-      // Find those request data that's not in the db, and create the batch job of input address that's not in the db
-      const batch = await createSmartyBatch(requestData);
+    // Find those request data that's not in the db, and create the batch job of input address that's not in the db
+    const batch = await createSmartyBatch(requestData);
 
-      // If there is address that is not in the DB, valid it in Smarty
-      let batchAddressData;
-      try {
-        batchAddressData = await getSmartyAddresses(batch);
-      } catch (err) {
-        return res.status(500).json({
-          success: false,
-          message: "Fail to validate addresses with Smarty",
-        });
-      }
+    // If there is address that is not in the DB, valid it in Smarty
+    let batchAddressData;
+    try {
+      batchAddressData = await getSmartyAddresses(batch);
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Fail to validate addresses with Smarty",
+      });
+    }
 
     await addAddressesToDb(batchAddressData);
 
