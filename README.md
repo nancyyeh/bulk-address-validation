@@ -5,6 +5,23 @@ again.
 
 Demo Link(https://bulk-address-validation.herokuapp.com/)
 
+# How to use
+
+`Post` to `/validate` with array of address
+
+Address must include
+
+- address_line_one
+- city
+- state
+- zip_code
+
+Example Input
+
+```
+[{"address_line_one": "1600 Amphitheater Pkwy", "city": "Mountainview", "state": "CA", "zip_code":"94043"}, {"address_line_one": "One Apple Park Way", "city": "Cupertino", "state": "CA", "zip_code":"95014"}]
+```
+
 # 💡Tech Spec
 
 - The endpoint should accept an array of addresses(assume max size: 5).
@@ -25,7 +42,9 @@ Demo Link(https://bulk-address-validation.herokuapp.com/)
 # 🚀 Launch
 
 Run Dev: `npm run devStart`
+
 Run Test: `npm run test`
+
 .env file is needed, needs
 
 - `DATABASE_URL`
