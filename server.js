@@ -12,14 +12,14 @@ db.on('error', (error) =>  console.error('***ERROR***', error));
 db.once('open', () => console.log('Connected to Database'));
 
 //Import Routes
-const usAddress = require('./routes/usValidator');
+const usAddress = require('./routes/validator');
 
 //Middlewares
-app.use('/us_validate', usAddress);
+app.use('/validate', usAddress);
 
 //Routes
 app.get('/', (req, res) => {
-    res.send('We are on home');
+    res.send("This is Nancy's Bulk Address Validator Tool");
 });
 
 // Started Server

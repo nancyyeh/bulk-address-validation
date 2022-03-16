@@ -6,7 +6,10 @@ const addressSchema = new mongoose.Schema(
         type: String,
         required: true,
     },
-    line2: String,
+    line2: {
+        type:String,
+        required: false
+    },
     city: {
         type: String,
         required: true,
@@ -15,13 +18,23 @@ const addressSchema = new mongoose.Schema(
         type: String,
         required: true,
     },
-    country: {
-        type: String,
-    },
+    //use string instead of number for future support in internation zip codes with inconsisitent formats
     zip: {
         type: String,
         required: true,
-    }, //use string instead of number for future support in internation zip codes with inconsisitent formats
+    }, 
+    latitude: {
+        type: String,
+        required: true,
+    }, 
+    longitude:  {
+        type: String,
+        required: true,
+    }, 
+    input: {
+        type: String,
+        required: true,
+    }
   },
   {timestamps: true}
 );
